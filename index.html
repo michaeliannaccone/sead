@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>Collection</title>
+	<link rel="stylesheet" media="screen" href="http://141.142.227.247/assets/stylesheets/main.css">
+	<link rel="stylesheet" href="http://141.142.227.247/assets/stylesheets/themes/simplex.min.css">
+	<link rel="stylesheet" media="screen" href="http://141.142.227.247/assets/javascripts/jquery-ui-1.10.3.custom.min.css">
+	<link rel="stylesheet" media="screen" href="http://141.142.227.247/assets/stylesheets/pdf.css">
+	<link rel="stylesheet" media="screen" href="http://141.142.227.247/assets/stylesheets/tableborder.css">
+	<link rel="shortcut icon" type="image/png" href="http://141.142.227.247/assets/images/favicon.png">
+	<script src="http://141.142.227.247/assets/javascripts/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="http://141.142.227.247/assets/javascripts/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+	<script src="http://141.142.227.247/assets/javascripts/bootstrap.min.js" type="text/javascript"></script>
+	<script src="http://141.142.227.247/assets/javascripts/noty/packaged/jquery.noty.packaged.min.js" type="text/javascript"></script>
+	<script src="http://141.142.227.247/assets/javascripts/main.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://141.142.227.247/javascriptRoutes"></script>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+    
+</head>
+<body>
+
+  <div id="wrap">
+	<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				      <span class="glyphicon-bar"></span>
+				      <span class="glyphicon-bar"></span>
+				      <span class="glyphicon-bar"></span>
+				    </button>
+					<a class="navbar-brand" href="http://141.142.227.247/">SEAD</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Spaces<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="http://141.142.227.247/spaces/new">Create</a></li>
+                                <li><a href="http://141.142.227.247/spaces">List</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+						   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collections<b class="caret"></b></a>
+						   <ul class="dropdown-menu">
+						   	<li><a href="http://141.142.227.247/collections/new">Create</a></li>
+						   	<li><a href="http://141.142.227.247/collections">List</a></li>						   	
+						   </ul>
+						</li>
+						<li class="dropdown">
+						   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Datasets<b class="caret"></b></a>
+						   <ul class="dropdown-menu">
+						   	<li><a href="http://141.142.227.247/datasets/new">Create</a></li>
+						   	<li><a href="http://141.142.227.247/datasets">List</a></li>
+						   	<li><a href="http://141.142.227.247/datasets/metadataSearch">Search by user metadata</a></li>
+						   	<li><a href="http://141.142.227.247/datasets/generalMetadataSearch">General metadata search</a></li>						   	
+						   </ul>
+						</li>
+						<li class="dropdown">
+						   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Files<b class="caret"></b></a>
+						   <ul class="dropdown-menu">
+						   	<li><a href="http://141.142.227.247/files/new">Upload</a></li>
+						   	<li><a href="http://141.142.227.247/files">List</a></li>
+						   	<li><a href="http://141.142.227.247/files/metadataSearch">Search by user metadata</a></li>
+						   	<li><a href="http://141.142.227.247/files/generalMetadataSearch">General metadata search</a></li>
+						   </ul>
+						</li>
+						<li class="dropdown">
+						   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags<b class="caret"></b></a>
+						   <ul class="dropdown-menu">
+                               <li><a href="http://141.142.227.247/tags/cloud">Tag cloud</a></li>
+                               <li><a href="http://141.142.227.247/tags/list">Tag list</a></li>
+						   </ul>
+						</li>
+                        <li><a href="http://141.142.227.247/assets/docs/api/index.html">API</a></li>
+					</ul>
+					
+					
+					
+							<div class="nav navbar-nav navbar-right col-md-3" style="vertical-align: middle;">
+								<form class="navbar-form navbar-right form-horizontal" role="search" action="/search">
+						        <div class="input-group">
+						            <input type="text" class="form-control input-sm" placeholder="Search" name="query" id="srch-term">
+						            <div class="input-group-btn">
+						                <button class="btn btn-default btn-sm" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+						            </div>
+						        </div>
+						        </form>
+						    </div>
+						
+
+					<ul class="nav navbar-nav navbar-right">
+                        
+                                <li>
+                                    <a href="http://141.142.227.247/login" title="Login to the system"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                                </li>
+                            
+
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
+                           <ul class="dropdown-menu" role="menu">
+                            <li><a href="http://141.142.227.247/admin">Customize</a></li>
+                            <li><a href="http://141.142.227.247/admin/listAdmins">List adminstrators</a></li>
+                            <li><a href="http://141.142.227.247/admin/addAdmin">Add administrator</a></li>
+                            <li><a href="http://141.142.227.247/admin/extractions">Extractions</a></li>
+                            <li><a href="http://141.142.227.247/admin/indexAdmin">Indexes</a></li>
+                           </ul>
+                        </li>
+					</ul>
+				</div>
+		</div>
+	</div>
+	<div class="container">
+		
+
+<script src="http://141.142.227.247/assets/javascripts/errorRedirect.js" type="text/javascript"></script>
+<script src="http://141.142.227.247/assets/javascripts/collectionDatasetsList.js" type="text/javascript"></script>
+<script src="http://141.142.227.247/assets/javascripts/collectionListProcess.js" type="text/javascript"></script>
+
+
+
+
+
+
+
+
+
+
+<div id="compliance">
+<h1>Metadata Status</h1>
+<script>
+
+/*
+
+Date: "2015-02-13T16:15:42.988Z"
+Identifier: "tag:medici@uiuc.edu,2009:data_dljmsIxG08eweIMsWeeCWQ"
+Label: "seadmenu.zip"
+Mimetype: "application/x-zip-compressed"
+Size: "53601"
+Title: "seadmenu.zip"
+Uploaded By: "http://cet.ncsa.uiuc.edu/2007/person/myersjd@umich.edu"
+
+
+@context: Object
+	Abstract: "http://purl.org/dc/terms/abstract"
+	Alternative title: "http://purl.org/dc/terms/alternative"
+	Audience: "http://purl.org/dc/terms/audience"
+	Bibliographic citation: "http://purl.org/dc/terms/bibliographicCitation"
+	Comment: Object
+	Contact: "http://sead-data.net/terms/contact"
+	Coverage: "http://purl.org/dc/terms/coverage"
+	Creation Date: "http://purl.org/dc/terms/created"
+	Creator: "http://purl.org/dc/terms/creator"
+	Date: "http://purl.org/dc/elements/1.1/date"
+	Description: "http://purl.org/dc/elements/1.1/description"
+	Experiment Site: "http://sead-data.net/terms/odm/location"
+	Experimental Method: "http://sead-data.net/terms/odm/method"
+	External Identifier: "http://purl.org/dc/terms/identifier"
+	GeoPoint: ObjectHas Description: "http://purl.org/dc/terms/description"
+	Identifier: "http://purl.org/dc/elements/1.1/identifier"
+	Label: "http://www.w3.org/2000/01/rdf-schema#label"
+	License: "http://purl.org/dc/terms/license"
+	Mimetype: "http://purl.org/dc/elements/1.1/format"
+	Primary Source: "http://www.w3.org/ns/prov#hadPrimarySource"
+	"Proposed for Publication ": "http://sead-data.net/terms/ProposedForPublication"
+	Publication Date: "http://purl.org/dc/terms/issued"
+	Published In: "http://purl.org/dc/terms/isPartOf"
+	Publisher: "http://purl.org/dc/terms/publisher"
+	Quality Control Level: "http://sead-data.net/terms/odm/QualityControlLevel"
+	Rights: "http://purl.org/dc/terms/rights"
+	Rights Holder: "http://purl.org/dc/terms/rightsHolder"
+	Size: "tag:tupeloproject.org,2006:/2.0/files/length"
+	Start/End Date: "http://purl.org/dc/terms/temporal"
+	Title: "http://purl.org/dc/elements/1.1/title"
+	Topic: "http://purl.org/dc/terms/subject"
+	Uploaded By: "http://purl.org/dc/elements/1.1/creator"
+	describes: "http://cet.ncsa.uiuc.edu/2007/mmdb/describes"
+	duplicates: "http://cet.ncsa.uiuc.edu/2007/mmdb/duplicates"
+	has derivative: "http://www.w3.org/ns/prov/#hadDerivation"
+	has newer version: "http://www.w3.org/ns/prov/#hadRevision"
+	has prior version: "http://www.w3.org/ns/prov#wasRevisionOf"
+	http://purl.org/vocab/frbr/core#embodimentOf: "http://purl.org/vocab/frbr/core#embodimentOf"
+	is derived from: "http://www.w3.org/ns/prov#wasDerivedFrom"
+	is referenced by: "http://purl.org/dc/terms/isReferencedBy"
+	keyword: "http://www.holygoat.co.uk/owl/redwood/0.1/tags/taggedWithTag"
+	references: "http://purl.org/dc/terms/references"
+	relates to: "http://cet.ncsa.uiuc.edu/2007/mmdb/relatesTo"
+
+
+*/
+
+function metadata(data){
+	//console.log(data);
+ 	var title = $('<p>').text(data.contents.Title);
+ 	var id = $('<p>').text(data.contents.Identifier);
+ 	var label = $('<p>').text(data.contents.Label);
+ 	var size = $('<p>').text(data.contents.Size);
+
+    $('#compliance').append(title).append(id).append(label).append(size);                 
+
+	var Abstract = data.contents['@context'].Abstract;
+	/*
+	
+	
+	for (var key in p) {
+  		if (p.hasOwnProperty(key)) {
+    		alert(key + " -> " + p[key]);
+  	}
+	}
+	
+	
+	*/
+
+
+
+
+
+}
+
+var $tag = "tag:medici@uiuc.edu,2009:data_dljmsIxG08eweIMsWeeCWQ";
+// circumvent single origin policy for dev purposes
+var $url = "http://www.whateverorigin.org/get?url=https://sead-test.ncsa.illinois.edu/acr/resteasy/collections/"+$tag+"/metadata";
+
+$.ajax({
+	url: $url,
+    dataType: "jsonp",
+    data: {
+        format: "json"
+    },
+    type: 'GET',
+	success: function(data) {
+		metadata(data); 
+	}
+});	      
+</script>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+<div class="page-header">
+  <h1>Charts_Isuru</h1>
+</div>
+<div class="row">
+	<div class="col-md-12">
+				<dl class="dl-horizontal">
+					
+						<dt>Author:</dt>
+						<dd>Kavitha Chandrasekar</dd>
+					
+                    <dt>Space:</dt>
+                    <dd>
+                        
+
+
+
+    
+    
+        <a href="#" id="space_link">Default</a>
+    
+
+<script src="http://141.142.227.247/assets/javascripts/handlebars-v1.3.0.js" type="text/javascript"></script>
+<script src="http://141.142.227.247/assets/javascripts/handlebars-loader.js" type="text/javascript"></script>
+<script src="http://141.142.227.247/assets/javascripts/spaces/modify.js" type="text/javascript"></script>
+                    </dd>
+					<dt>Description:</dt>
+					<dd>This collection includes data developed and used for the analysis of the Birds Point-New Madrid (BPNM) Floodway activation in 2011. The data collection includes 10 items, all of which present the processed and derived data. The processed differential LiDAR is the 2005 (pre-flood) LiDAR subtracted from the 2011 (post-flood) LiDAR and corrected for flight line errors. The original LiDAR data were obtained from US Army Corps of Engineers. There are 5 simulated maximum velocity data items from HydroSed2D at two locations (Oâ€™Bryan Ridge and Ten Mile Pond) and 2 simulation cases (vegetation and no vegetation). The maximum velocity data for the entire Floodway is for the vegetated case. The NASA AVIRIS dataset is classified into classes representing woody vegetation and bare soil. The soil dataset (K/T) is an erodibility index derived from USDA SSURGO data. Additional data for this study was provided by the USGS, and is available along with the report at the following site: http://pubs.usgs.gov/pp/1798e/. This data includes ADCP (Acoustic Doppler Current Profiler) flow measurements from the inflows an outflows of the Floodway, and HOBO depth sensor measurements from various points within the Floodway. This data were used to validate the HydroSed2D simulations.</dd>																						            
+				</dl>
+				
+				
+	</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        
+    </div>
+</div>
+
+	<div class="col-md-12">
+		<h3>Datasets in the collection</h3>
+		<table id='collectionDatasetsTable' class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					
+					
+						<th style="width: 27%">Name</th>
+						<th style="width: 17%">Created</th>
+						<th style="width: 36%">Description</th>
+						<th style="width: 20%"></th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				
+					<tr data-datasetId="5494c5fde4b0c92c2d58b3d8">
+						<td><a href="http://141.142.227.247/datasets/5494c5fde4b0c92c2d58b3d8">flashpro_isuru.png</a></td>
+						<td>Oct 02, 2014</td>
+						<td style="white-space:pre-line;">N/A</td>
+						<td>
+							<img src="http://141.142.227.247/fileThumbnail/5494c5fde4b0abfd4f2beae7/blob" alt="Thumbnail of flashpro_isuru.png" width="120">
+							
+						</td>
+						<td class="requiresLogin"><a href="#!" onclick="removeDataset('5494c5fde4b0c92c2d58b3d8',event)">Remove</a>
+						    
+						</td>
+					</tr>
+				
+					<tr data-datasetId="5494c5fbe4b0c92c2d58b3d7">
+						<td><a href="http://141.142.227.247/datasets/5494c5fbe4b0c92c2d58b3d7">FishEye_Charts_Page04_isuru.png</a></td>
+						<td>Oct 02, 2014</td>
+						<td style="white-space:pre-line;">N/A</td>
+						<td>
+							<img src="http://141.142.227.247/fileThumbnail/5494c5fae4b0abfd4f2beadf/blob" alt="Thumbnail of FishEye_Charts_Page04_isuru.png" width="120">
+							
+						</td>
+						<td class="requiresLogin"><a href="#!" onclick="removeDataset('5494c5fbe4b0c92c2d58b3d7',event)">Remove</a>
+						    
+						</td>
+					</tr>
+				
+					<tr data-datasetId="5494c5f8e4b0c92c2d58b3d6">
+						<td><a href="http://141.142.227.247/datasets/5494c5f8e4b0c92c2d58b3d6">charts_reports_isuru.jpg</a></td>
+						<td>Oct 02, 2014</td>
+						<td style="white-space:pre-line;">N/A</td>
+						<td>
+							<img src="http://141.142.227.247/fileThumbnail/5494c5f7e4b0abfd4f2bead7/blob" alt="Thumbnail of charts_reports_isuru.jpg" width="120">
+							
+						</td>
+						<td class="requiresLogin"><a href="#!" onclick="removeDataset('5494c5f8e4b0c92c2d58b3d6',event)">Remove</a>
+						    
+						</td>
+					</tr>
+				
+					<tr data-datasetId="5494c5f5e4b0c92c2d58b3d5">
+						<td><a href="http://141.142.227.247/datasets/5494c5f5e4b0c92c2d58b3d5">charts-3sunw-c_isuru.png</a></td>
+						<td>Oct 02, 2014</td>
+						<td style="white-space:pre-line;">N/A</td>
+						<td>
+							<img src="http://141.142.227.247/fileThumbnail/5494c5f5e4b0abfd4f2beacf/blob" alt="Thumbnail of charts-3sunw-c_isuru.png" width="120">
+							
+						</td>
+						<td class="requiresLogin"><a href="#!" onclick="removeDataset('5494c5f5e4b0c92c2d58b3d5',event)">Remove</a>
+						    
+						</td>
+					</tr>
+				
+					<tr data-datasetId="5494c5f3e4b0c92c2d58b3d4">
+						<td><a href="http://141.142.227.247/datasets/5494c5f3e4b0c92c2d58b3d4">Chart_isuru.jpg</a></td>
+						<td>Oct 02, 2014</td>
+						<td style="white-space:pre-line;">N/A</td>
+						<td>
+							<img src="http://141.142.227.247/fileThumbnail/5494c5f2e4b0abfd4f2beac7/blob" alt="Thumbnail of Chart_isuru.jpg" width="120">
+							
+						</td>
+						<td class="requiresLogin"><a href="#!" onclick="removeDataset('5494c5f3e4b0c92c2d58b3d4',event)">Remove</a>
+						    
+						</td>
+					</tr>
+				
+					<tr data-datasetId="5494c5f0e4b0c92c2d58b3d3">
+						<td><a href="http://141.142.227.247/datasets/5494c5f0e4b0c92c2d58b3d3">chart_grouped_column_farms_isuru.png</a></td>
+						<td>Oct 02, 2014</td>
+						<td style="white-space:pre-line;">N/A</td>
+						<td>
+							<img src="http://141.142.227.247/fileThumbnail/5494c5efe4b0abfd4f2beabf/blob" alt="Thumbnail of chart_grouped_column_farms_isuru.png" width="120">
+							
+						</td>
+						<td class="requiresLogin"><a href="#!" onclick="removeDataset('5494c5f0e4b0c92c2d58b3d3',event)">Remove</a>
+						    
+						</td>
+					</tr>
+				
+					<tr data-datasetId="5494c5ede4b0c92c2d58b3d2">
+						<td><a href="http://141.142.227.247/datasets/5494c5ede4b0c92c2d58b3d2">3d_pie_chart_isuru.jpg</a></td>
+						<td>Oct 02, 2014</td>
+						<td style="white-space:pre-line;">N/A</td>
+						<td>
+							<img src="http://141.142.227.247/fileThumbnail/5494c5ece4b0abfd4f2beab7/blob" alt="Thumbnail of 3d_pie_chart_isuru.jpg" width="120">
+							
+						</td>
+						<td class="requiresLogin"><a href="#!" onclick="removeDataset('5494c5ede4b0c92c2d58b3d2',event)">Remove</a>
+						    
+						</td>
+					</tr>
+				
+			</tbody>
+		</table>
+		<ul class="pager" id="datasetsPager">
+			<li class="previous" id="datasetsPagerPrev" style="visibility:hidden;"><a href="#!">Previous</a></li>
+  			<li class ="next" id="datasetsPagerNext" style="visibility:hidden;"><a href="#!">Next</a></li>
+		</ul>
+		<button id="addDatasetBtn" class="btn btn-default requiresLogin" type="button" title="View Dataset List"><span class="glyphicon glyphicon-plus"></span> Add</button>
+		<button id="hideAddDatasetBtn" class="btn btn-default" type="button" style="display:none;" title="Close Dataset List"><span class="glyphicon glyphicon-remove"></span></button>
+		<br />
+		<br />		
+		<table id='addDatasetsTable' class="table table-bordered table-hover" style="display:none;">
+			<thead>
+				<tr>
+					<th style="width: 27%">Name</th>
+					<th style="width: 17%">Created</th>
+					<th style="width: 36%">Description</th>
+					<th style="width: 10%"></th>
+					<th style="width: 10%"></th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<ul class="pager" id="addPager">
+  			<li class="previous" id="addPagerPrev" style="visibility:hidden;"><a href="#!">Previous</a></li>
+  			<li class ="next" id="addPagerNext" style="visibility:hidden;"><a href="#!">Next</a></li>
+		</ul>
+	</div>
+</div>
+
+-->
+<script language="javascript">
+	
+	
+		$(".requiresLogin").css("display","none");
+	
+
+	var queryIp = "/api/datasets/listOutsideCollection/5494c63ce4b0c92c2d58b412";
+	var collectionId = "5494c63ce4b0c92c2d58b412";
+</script>
+    <script src="http://141.142.227.247/assets/javascripts/handlebars-v1.3.0.js" type="text/javascript"></script>
+    <script src="http://141.142.227.247/assets/javascripts/handlebars-loader.js" type="text/javascript"></script>
+    <script src="http://141.142.227.247/assets/javascripts/spaces/modify.js" type="text/javascript"></script>
+
+
+	</div>
+	<div id="push"></div>
+  </div>
+  
+  <div id="footer">
+    <div class="container">
+      <p class="muted credit">Powered by <a href="http://medici.ncsa.illinois.edu">Medici</a>
+		  (2.0.0#4
+		  branch:feature/spaces sha1:192ff2b).</p>
+    </div>
+  </div>
+  
+
+</body>
+</html>
+

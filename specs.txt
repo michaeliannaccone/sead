@@ -1,0 +1,18 @@
+
+
+
+For each project use /acr/resteasy/sys/info to get info
+
+
+var projects = '["https://ifri.ncsa.illinois.edu/acr","https://hydroshare.ncsa.illinois.edu/acr","https://colombiaflood.ncsa.illinois.edu/acr","https://sead-test.ncsa.illinois.edu/acr","https://erentp.ncsa.illinois.edu/acr","https://sbdc.ncsa.illinois.edu/acr","https://sead.ncsa.illinois.edu/acr","https://sen.ncsa.illinois.edu/acr","http://imlczo-sead.ncsa.illinois.edu/acr","https://irbo.ncsa.illinois.edu/acr","https://bgcumbs.ncsa.illinois.edu/acr","https://wsc-reach.ncsa.illinois.edu/acr","https://sead-open.ncsa.illinois.edu/acr","https://glwis.ncsa.illinois.edu/acr","https://nced.ncsa.illinois.edu/acr","https://wcparc.ncsa.illinois.edu/acr","https://neon.ncsa.illinois.edu/acr","https://lse.ncsa.illinois.edu/acr","https://lowermississippi.ncsa.illinois.edu/acr","https://sead-demo.ncsa.illinois.edu/acr","https://umbio.ncsa.illinois.edu/acr","https://ccc.ncsa.illinois.edu/acr"]';
+
+
+
+
+Use web service to:
+-return the list of spaces
+-get logos/colors
+-get name/description
+
+
+For 1.5 today, you’re ~ limited to what the /sys/info /sys/config and /sys/basic calls return for a space unless you do your own query/counting based off of other /datasets and /collections calls. We could add  something like # downloads to what /sys/info returns, but that would be server-side. 
