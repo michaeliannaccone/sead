@@ -104,6 +104,7 @@ seadSpaces.initSort = function(){
   		valueNames: ['name','fade-in-content']
 	};
 	var spaceList = new List('project-spaces-dashboard', options);  
+	spaceList.sort('name', { order: "asc" });  
 	$('#loading-spinner').remove();
 }
 
