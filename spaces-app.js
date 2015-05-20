@@ -37,10 +37,16 @@ seadSpaces.abbreviateNumber = function(value){
 
 seadSpaces.initSort = function(){
 	var options = {
-  		valueNames: ['name','fade-in-content','published']
+  		valueNames: ['name','fade-in-content','published','views']
 	};
+	
 	var spaceList = new List('project-spaces-dashboard', options);  
 	spaceList.sort('name', { order: "asc" }); 
+    
+	$('#sort-views').click(function(){
+		spaceList.sort('views', { order: "desc" }); 
+
+	})
 
 	$('#filter-published').click(function() {
   		spaceList.filter(function(item) {
@@ -53,6 +59,13 @@ seadSpaces.initSort = function(){
   	 });
   	return false;
 	});
+
+	$('#reset-button').click(function() {
+        $('#search-field').val('');
+    	spaceList.search();
+    	spaceList.sort('name', { order: "asc" }); 
+    	spaceList.filter();
+    });
 
 
 	$('#loading-spinner').remove();
@@ -98,7 +111,6 @@ seadSpaces.init = function(){
   	var configurl = "http://www.whateverorigin.org/get?url="+value+"/resteasy/sys/config";
   	var infourl = "http://www.whateverorigin.org/get?url="+value+"/resteasy/sys/info";
   	$.when(seadSpaces.doAjax(configurl), seadSpaces.doAjax(infourl)).done(function(config, info){
-         console.log(config);
          var projectName = config[0].contents["project.name"];
 		 var projectDescription = config[0].contents["project.description"];
 		 var projectLogo = config[0].contents["project.header.logo"];
