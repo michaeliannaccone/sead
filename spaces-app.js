@@ -80,11 +80,7 @@ seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLog
 	page += '<a href="'+value+'"><div class="fade-wrapper">';
 	page += '<div class="fade-out" style="background-image:url('+projectLogo+'),url('+projectBg+');">';
 	page += '</div>';		
-	page += '<div class="fade-in">';
-	page += '<div class="fade-in-content">';
-	page += projectDescription.replace(/<(?:.|\n)*?>/gm, '');
-	page += '</div>';
-	page += '</div>';
+	if(projectDescription){page += '<div class="fade-in"><div class="fade-in-content">'+projectDescription.replace(/<(?:.|\n)*?>/gm, '')+'</div></div>';}
 	page += '</div></a>';
 	page += '<div class="space-stats">';
 	page += '<h4><a href="'+value+'" class="name">'+projectName+'</a></h4>';
