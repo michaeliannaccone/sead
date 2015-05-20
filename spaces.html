@@ -249,11 +249,21 @@
 <div class="filters">
 	
 
-	<label>Search:</label>
+	<label>Search</label>
 	<input class="search form-control" id="search-field" placeholder="Search" type="text" />
-	<button class="sort" id="sort-views">Sort by Number of Views</button>
-	<button class="sort" data-sort="name">Sort by Name</button>
-	<button id="filter-published">Only Show Spaces with Published Datasets</button>
+	
+	<label>Sort by</label>
+	<button class="sort" id="sort-views">Views</button>
+	<button class="sort" id="sort-name">Name</button>
+	<button class="sort" id="sort-users">Users</button>
+	<button class="sort" id="sort-collections">Collections</button>
+	<button class="sort" id="sort-datasets">Datasets</button>
+	
+
+
+	<label>Filter</label>
+	<button class="filter" id="filter-published">Only Show Spaces with Published Datasets</button>
+	<br /><br />
 	<button id="reset-button">Reset</button>
 	
 </div>

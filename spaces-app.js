@@ -37,16 +37,46 @@ seadSpaces.abbreviateNumber = function(value){
 
 seadSpaces.initSort = function(){
 	var options = {
-  		valueNames: ['name','fade-in-content','published','views']
+  		valueNames: ['name','fade-in-content','published','views','collections','teammates','datasets']
 	};
 	
 	var spaceList = new List('project-spaces-dashboard', options);  
 	spaceList.sort('name', { order: "asc" }); 
     
 	$('#sort-views').click(function(){
+		$('.sort').removeClass('active');
+		$(this).addClass('active');
 		spaceList.sort('views', { order: "desc" }); 
 
-	})
+	});
+
+	$('#sort-users').click(function(){
+		$('.sort').removeClass('active');
+		$(this).addClass('active');
+		spaceList.sort('teammates', { order: "desc" }); 
+
+	});
+
+	$('#sort-name').click(function(){
+		$('.sort').removeClass('active');
+		$(this).addClass('active');
+		spaceList.sort('name', { order: "asc" }); 
+
+	});
+
+	$('#sort-collections').click(function(){
+		$('.sort').removeClass('active');
+		$(this).addClass('active');
+		spaceList.sort('collections', { order: "desc" }); 
+
+	});
+
+	$('#sort-datasets').click(function(){
+		$('.sort').removeClass('active');
+		$(this).addClass('active');
+		spaceList.sort('datasets', { order: "desc" }); 
+
+	});
 
 	$('#filter-published').click(function() {
   		spaceList.filter(function(item) {
@@ -56,7 +86,10 @@ seadSpaces.initSort = function(){
     	else {
       		return false;
     	}
+
   	 });
+  	$('.filter').removeClass('active');
+	$(this).addClass('active');	
   	return false;
 	});
 
@@ -65,6 +98,8 @@ seadSpaces.initSort = function(){
     	spaceList.search();
     	spaceList.sort('name', { order: "asc" }); 
     	spaceList.filter();
+    	$('.filter').removeClass('active');
+    	$('.sort').removeClass('active');
     });
 
 

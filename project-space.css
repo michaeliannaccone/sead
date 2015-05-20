@@ -495,3 +495,8 @@ font-size: 1.1em;
 	left: 50%;
 	top: 50%;
 }
+
+button.active {
+	font-weight: bold;
+	background: #6a6a6a;
+}
