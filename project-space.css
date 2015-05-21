@@ -389,30 +389,12 @@ bottom: 4px;
 
 .project-spaces-dashboard li {
 display: inline-block;
-width: 32px;
-padding-left: 35px;
+width: 55px;
+padding-left: 5px;
 line-height: 25px;
 text-transform: uppercase;
-}
-
-.project-spaces-dashboard li.views {
-background: url('images/views.png') left center no-repeat;
-}
-
-.project-spaces-dashboard li.teammates {
-background: url('images/teammates.png') left center no-repeat;
-}
-
-.project-spaces-dashboard li.collections {
-background: url('images/collections.png') left center no-repeat;
-}
-
-.project-spaces-dashboard li.datasets {
-background: url('images/datasets.png') left center no-repeat;
-}
-
-.project-spaces-dashboard li.published {
-background: url('images/published.png') left center no-repeat;
+color: #f3882a;
+vertical-align: middle;
 }
 
 .fade-wrapper {
@@ -423,6 +405,10 @@ overflow: hidden;
 
 .fade-wrapper .fade-out {
 margin-bottom: 0;
+}
+
+.project-spaces-dashboard .datasets_raw {
+display: none;
 }
 
 .fade-wrapper .fade-in {

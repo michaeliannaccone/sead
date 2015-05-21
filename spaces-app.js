@@ -37,7 +37,7 @@ seadSpaces.abbreviateNumber = function(value){
 
 seadSpaces.initSort = function(){
 	var options = {
-  		valueNames: ['name','fade-in-content','published','views','collections','teammates','datasets']
+  		valueNames: ['name','fade-in-content','published','views','collections','teammates','datasets_raw']
 	};
 	
 	var spaceList = new List('project-spaces-dashboard', options);  
@@ -74,7 +74,7 @@ seadSpaces.initSort = function(){
 	$('#sort-datasets').click(function(){
 		$('.sort').removeClass('active');
 		$(this).addClass('active');
-		spaceList.sort('datasets', { order: "desc" }); 
+		spaceList.sort('datasets_raw', { order: "desc" }); 
 
 	});
 
@@ -107,7 +107,18 @@ seadSpaces.initSort = function(){
 }
 
 
-seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets,users,views,collections,published,value){
+
+seadSpaces.formatBytes = function(bytes,decimals){
+    if(bytes == 0) return '0 Byte';
+    var k = 1000;
+    var dm = decimals + 1 || 3;
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    var i = Math.floor(Math.log(bytes) / Math.log(k));
+    return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
+}
+
+
+seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,views,collections,published,bytes,value){
 
 	var page = '';
 	page += '<div class="span4">';
@@ -120,11 +131,13 @@ seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLog
 	page += '<div class="space-stats">';
 	page += '<h4><a href="'+value+'" class="name">'+projectName+'</a></h4>';
 	page += '<ul>';
-	if(views){page += '<li class="views" title="'+views+' views">'+views+'</li>';}
-	if(users){page += '<li class="teammates" title="'+users+' contributors">'+users+'</li>';}
-	if(collections){page += '<li class="collections" title="'+collections+' collections">'+collections+'</li>';}
-	if(datasets){page += '<li class="datasets" title="'+datasets+' datasets">'+datasets+'</li>';}
-	if(published){page += '<li class="published" title="'+published+' published dataset">'+published+'</li>';}
+	if(views){page += '<li class="views" title="'+views+' views"><i class="fa fa-lg fa-eye"></i> '+views+'</li>';}
+	if(users){page += '<li class="teammates" title="'+users+' contributors"><i class="fa fa-lg fa-user"></i> '+users+'</li>';}
+	if(collections){page += '<li class="collections" title="'+collections+' collections"><i class="fa fa-lg fa-folder"></i> '+collections+'</li>';}
+	if(datasets_display){page += '<li class="datasets" title="'+datasets_display+' datasets"><i class="fa fa-lg fa-database"></i> '+datasets_display+'</li>';}
+	if(datasets_raw){page += '<li class="datasets_raw">'+datasets_raw+'</li>';}
+	//if(bytes){page += '<li class="bytes" title="'+bytes+' bytes"><i class="fa fa-lg fa-hdd-o"></i> '+bytes+'</li>';}
+	if(published){page += '<li class="published" title="'+published+' published dataset"><i class="fa fa-lg fa-folder-open"></i> '+published+'</li>';}
 	page += '<ul>';
 	page += '</div>';
 	page += '</div>';
@@ -142,6 +155,7 @@ seadSpaces.init = function(){
   	var configurl = "http://www.whateverorigin.org/get?url="+value+"/resteasy/sys/config";
   	var infourl = "http://www.whateverorigin.org/get?url="+value+"/resteasy/sys/info";
   	$.when(seadSpaces.doAjax(configurl), seadSpaces.doAjax(infourl)).done(function(config, info){
+         console.log(info);
          var projectName = config[0].contents["project.name"];
 		 var projectDescription = config[0].contents["project.description"];
 		 var projectLogo = config[0].contents["project.header.logo"];
@@ -153,12 +167,14 @@ seadSpaces.init = function(){
 		 if(typeof projectLogo !== 'undefined' && projectLogo.substring(0, 6) == "images"){
 		    projectLogo  = value+'/'+projectLogo;
 		 }
-         var datasets = seadSpaces.abbreviateNumber(info[0].contents["Datasets"]);
+		 var bytes = info[0].contents["Total number of bytes"];
+         var datasets_display = seadSpaces.abbreviateNumber(info[0].contents["Datasets"]);
+         var datasets_raw = info[0].contents["Datasets"];
 		 var users = seadSpaces.abbreviateNumber(info[0].contents["Number of Users"]);
          var views = seadSpaces.abbreviateNumber(info[0].contents["Total Views"]);
          var collections = seadSpaces.abbreviateNumber(info[0].contents["Collections "]);
          var published = seadSpaces.abbreviateNumber(info[0].contents["Published Collections"]);
-         seadSpaces.buildGrid(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets,users,views,collections,published,value);
+         seadSpaces.buildGrid(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,views,collections,published,bytes,value);
          i++;
     });
     });
