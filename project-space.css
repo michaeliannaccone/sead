@@ -389,12 +389,15 @@ bottom: 4px;
 
 .project-spaces-dashboard li {
 display: inline-block;
-width: 55px;
-padding-left: 5px;
+padding-left: 15px;
 line-height: 25px;
 text-transform: uppercase;
 color: #f3882a;
 vertical-align: middle;
+}
+
+.project-spaces-dashboard li:first-child {
+padding-left: 0;
 }
 
 .fade-wrapper {
@@ -407,7 +410,8 @@ overflow: hidden;
 margin-bottom: 0;
 }
 
-.project-spaces-dashboard .datasets_raw {
+.project-spaces-dashboard .datasets_raw,
+.project-spaces-dashboard .collections_raw {
 display: none;
 }
 

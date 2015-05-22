@@ -37,7 +37,7 @@ seadSpaces.abbreviateNumber = function(value){
 
 seadSpaces.initSort = function(){
 	var options = {
-  		valueNames: ['name','fade-in-content','published','views','collections','teammates','datasets_raw']
+  		valueNames: ['name','fade-in-content','published','views','collections_raw','teammates','datasets_raw']
 	};
 	
 	var spaceList = new List('project-spaces-dashboard', options);  
@@ -67,7 +67,7 @@ seadSpaces.initSort = function(){
 	$('#sort-collections').click(function(){
 		$('.sort').removeClass('active');
 		$(this).addClass('active');
-		spaceList.sort('collections', { order: "desc" }); 
+		spaceList.sort('collections_raw', { order: "desc" }); 
 
 	});
 
@@ -118,8 +118,14 @@ seadSpaces.formatBytes = function(bytes,decimals){
 }
 
 
-seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,views,collections,published,bytes,value){
+seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,views,collections,collections_raw,published,bytes,value){
 
+    if(bytes.indexOf('GB')>0 || bytes.indexOf('bytes')>0 || bytes.indexOf('MB')>0 || bytes.indexOf('TB')>0|| bytes.indexOf('KB')>0){
+    	bytes = null;
+    }
+    else{
+    	bytes = seadSpaces.formatBytes(bytes,2);
+    }
 	var page = '';
 	page += '<div class="span4">';
 	page += '<div class="space-wrapper">';
@@ -133,10 +139,16 @@ seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLog
 	page += '<ul>';
 	if(views){page += '<li class="views" title="'+views+' views"><i class="fa fa-lg fa-eye"></i> '+views+'</li>';}
 	if(users){page += '<li class="teammates" title="'+users+' contributors"><i class="fa fa-lg fa-user"></i> '+users+'</li>';}
+	
+	if(!collections_raw){collections_raw=0;}
+	page += '<li class="collections_raw" title="'+collections_raw+' collections"><i class="fa fa-lg fa-folder"></i> '+collections_raw+'</li>';
 	if(collections){page += '<li class="collections" title="'+collections+' collections"><i class="fa fa-lg fa-folder"></i> '+collections+'</li>';}
+	
+	if(!datasets_raw){datasets_raw=0;}
+	page += '<li class="datasets_raw">'+datasets_raw+'</li>';
 	if(datasets_display){page += '<li class="datasets" title="'+datasets_display+' datasets"><i class="fa fa-lg fa-database"></i> '+datasets_display+'</li>';}
-	if(datasets_raw){page += '<li class="datasets_raw">'+datasets_raw+'</li>';}
-	//if(bytes){page += '<li class="bytes" title="'+bytes+' bytes"><i class="fa fa-lg fa-hdd-o"></i> '+bytes+'</li>';}
+	
+	if(bytes){page += '<li class="bytes" title="'+bytes+'"><i class="fa fa-lg fa-hdd-o"></i> '+bytes+'</li>';}
 	if(published){page += '<li class="published" title="'+published+' published dataset"><i class="fa fa-lg fa-folder-open"></i> '+published+'</li>';}
 	page += '<ul>';
 	page += '</div>';
@@ -173,8 +185,9 @@ seadSpaces.init = function(){
 		 var users = seadSpaces.abbreviateNumber(info[0].contents["Number of Users"]);
          var views = seadSpaces.abbreviateNumber(info[0].contents["Total Views"]);
          var collections = seadSpaces.abbreviateNumber(info[0].contents["Collections "]);
+         var collections_raw = info[0].contents["Collections "];
          var published = seadSpaces.abbreviateNumber(info[0].contents["Published Collections"]);
-         seadSpaces.buildGrid(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,views,collections,published,bytes,value);
+         seadSpaces.buildGrid(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,views,collections,collections_raw,published,bytes,value);
          i++;
     });
     });
