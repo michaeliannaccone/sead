@@ -411,7 +411,10 @@ margin-bottom: 0;
 }
 
 .project-spaces-dashboard .datasets_raw,
-.project-spaces-dashboard .collections_raw {
+.project-spaces-dashboard .collections_raw,
+.project-spaces-dashboard .bytes_raw,
+.project-spaces-dashboard .views_raw,
+.project-spaces-dashboard .users_raw {
 display: none;
 }
 

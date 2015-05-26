@@ -37,7 +37,7 @@ seadSpaces.abbreviateNumber = function(value){
 
 seadSpaces.initSort = function(){
 	var options = {
-  		valueNames: ['name','fade-in-content','published','views','collections_raw','teammates','datasets_raw']
+  		valueNames: ['name','fade-in-content','published','views_raw','collections_raw','teammates','datasets_raw','bytes_raw']
 	};
 	
 	var spaceList = new List('project-spaces-dashboard', options);  
@@ -46,7 +46,7 @@ seadSpaces.initSort = function(){
 	$('#sort-views').click(function(){
 		$('.sort').removeClass('active');
 		$(this).addClass('active');
-		spaceList.sort('views', { order: "desc" }); 
+		spaceList.sort('views_raw', { order: "desc" }); 
 
 	});
 
@@ -54,6 +54,13 @@ seadSpaces.initSort = function(){
 		$('.sort').removeClass('active');
 		$(this).addClass('active');
 		spaceList.sort('teammates', { order: "desc" }); 
+
+	});
+
+	$('#sort-bytes').click(function(){
+		$('.sort').removeClass('active');
+		$(this).addClass('active');
+		spaceList.sort('bytes_raw', { order: "desc" }); 
 
 	});
 
@@ -118,12 +125,14 @@ seadSpaces.formatBytes = function(bytes,decimals){
 }
 
 
-seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,views,collections,collections_raw,published,bytes,value){
-
+seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,users_raw,views,views_raw,collections,collections_raw,published,bytes,value){
+   
     if(bytes.indexOf('GB')>0 || bytes.indexOf('bytes')>0 || bytes.indexOf('MB')>0 || bytes.indexOf('TB')>0|| bytes.indexOf('KB')>0){
+    // hide values that are not being served in bytes
     	bytes = null;
     }
     else{
+    	var bytes_raw = bytes;
     	bytes = seadSpaces.formatBytes(bytes,2);
     }
 	var page = '';
@@ -137,7 +146,13 @@ seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLog
 	page += '<div class="space-stats">';
 	page += '<h4><a href="'+value+'" class="name">'+projectName+'</a></h4>';
 	page += '<ul>';
+
+	if(!views_raw){views_raw=0;}
+	page += '<li class="views_raw">'+views_raw+'</li>';
 	if(views){page += '<li class="views" title="'+views+' views"><i class="fa fa-lg fa-eye"></i> '+views+'</li>';}
+
+    if(!users_raw){users_raw=0;}
+	page += '<li class="users_raw">'+users_raw+'</li>';
 	if(users){page += '<li class="teammates" title="'+users+' contributors"><i class="fa fa-lg fa-user"></i> '+users+'</li>';}
 	
 	if(!collections_raw){collections_raw=0;}
@@ -148,7 +163,10 @@ seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLog
 	page += '<li class="datasets_raw">'+datasets_raw+'</li>';
 	if(datasets_display){page += '<li class="datasets" title="'+datasets_display+' datasets"><i class="fa fa-lg fa-database"></i> '+datasets_display+'</li>';}
 	
+	if(!bytes_raw){bytes_raw=0;}
+	page += '<li class="bytes_raw">'+bytes_raw+'</li>';
 	if(bytes){page += '<li class="bytes" title="'+bytes+'"><i class="fa fa-lg fa-hdd-o"></i> '+bytes+'</li>';}
+	
 	if(published){page += '<li class="published" title="'+published+' published dataset"><i class="fa fa-lg fa-folder-open"></i> '+published+'</li>';}
 	page += '<ul>';
 	page += '</div>';
@@ -183,11 +201,13 @@ seadSpaces.init = function(){
          var datasets_display = seadSpaces.abbreviateNumber(info[0].contents["Datasets"]);
          var datasets_raw = info[0].contents["Datasets"];
 		 var users = seadSpaces.abbreviateNumber(info[0].contents["Number of Users"]);
+		 var users_raw = info[0].contents["Number of Users"];
          var views = seadSpaces.abbreviateNumber(info[0].contents["Total Views"]);
+         var views_raw = info[0].contents["Total Views"];
          var collections = seadSpaces.abbreviateNumber(info[0].contents["Collections "]);
          var collections_raw = info[0].contents["Collections "];
          var published = seadSpaces.abbreviateNumber(info[0].contents["Published Collections"]);
-         seadSpaces.buildGrid(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,views,collections,collections_raw,published,bytes,value);
+         seadSpaces.buildGrid(size,i,projectName,projectDescription,projectLogo,projectColor,projectBg,datasets_display,datasets_raw,users,users_raw,views,views_raw,collections,collections_raw,published,bytes,value);
          i++;
     });
     });
