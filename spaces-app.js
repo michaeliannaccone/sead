@@ -1,7 +1,5 @@
 var seadSpaces = {};
 
-seadSpaces.projects = ["https://ifri.ncsa.illinois.edu/acr","https://hydroshare.ncsa.illinois.edu/acr","https://colombiaflood.ncsa.illinois.edu/acr","https://sead-test.ncsa.illinois.edu/acr","https://erentp.ncsa.illinois.edu/acr","https://sbdc.ncsa.illinois.edu/acr","https://sead.ncsa.illinois.edu/acr","https://sen.ncsa.illinois.edu/acr","http://imlczo-sead.ncsa.illinois.edu/acr","https://irbo.ncsa.illinois.edu/acr","https://bgcumbs.ncsa.illinois.edu/acr","https://wsc-reach.ncsa.illinois.edu/acr","https://sead-open.ncsa.illinois.edu/acr","https://glwis.ncsa.illinois.edu/acr","https://nced.ncsa.illinois.edu/acr","https://wcparc.ncsa.illinois.edu/acr","https://neon.ncsa.illinois.edu/acr","https://lse.ncsa.illinois.edu/acr","https://lowermississippi.ncsa.illinois.edu/acr","https://sead-demo.ncsa.illinois.edu/acr","https://umbio.ncsa.illinois.edu/acr","https://ccc.ncsa.illinois.edu/acr"];
-
 seadSpaces.doAjax = function(url){
 	return $.ajax({
 	url: url,
@@ -11,8 +9,11 @@ seadSpaces.doAjax = function(url){
     },
     type: 'GET',
 	success: function(data) {
-		//console.log('successful');
-	 }
+		//console.log(data);
+	 },
+	error: function (request, status, error) {
+        console.log(request.responseText);
+    }
   });	
 }
 
@@ -176,16 +177,28 @@ seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLog
 	if(i==size){seadSpaces.initSort();}
 }
 
+seadSpaces.getSpaces = function(url){
+	return $.get(url, function( spaces ) {
+	});
+}
+
 
 seadSpaces.init = function(){
 	var i = 1;
-	var size = seadSpaces.projects.length;
-	$.each( seadSpaces.projects, function( key, value ) {
+	var spaces = '';
+   
+    $.when(seadSpaces.getSpaces("http://sead.ncsa.illinois.edu/projects/spaces")).done(function(spaces){
+    spaces = spaces.replace(/\"/g,'');
+    spaces = spaces.replace('[','');
+    spaces = spaces.replace(']','');
+    spaces = spaces.split(',');
+    //console.log(spaces);
+	var size = spaces.length;
+	$.each( spaces, function( key, value ) {
   	// need to bypass single origin policy - remove for production
   	var configurl = "http://www.whateverorigin.org/get?url="+value+"/resteasy/sys/config";
   	var infourl = "http://www.whateverorigin.org/get?url="+value+"/resteasy/sys/info";
   	$.when(seadSpaces.doAjax(configurl), seadSpaces.doAjax(infourl)).done(function(config, info){
-         console.log(info);
          var projectName = config[0].contents["project.name"];
 		 var projectDescription = config[0].contents["project.description"];
 		 var projectLogo = config[0].contents["project.header.logo"];
@@ -211,6 +224,9 @@ seadSpaces.init = function(){
          i++;
     });
     });
+
+    });
+
 }
 
 seadSpaces.init();
