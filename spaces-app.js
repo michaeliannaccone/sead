@@ -43,7 +43,7 @@ seadSpaces.initSort = function(){
 	
 	var spaceList = new List('project-spaces-dashboard', options);  
 	spaceList.sort('name', { order: "asc" }); 
-    
+
 	$('#sort-views').click(function(){
 		$('.sort').removeClass('active');
 		$(this).addClass('active');
@@ -88,8 +88,10 @@ seadSpaces.initSort = function(){
 
 	$('#filter-published').click(function() {
   		spaceList.filter(function(item) {
+  			console.log(item.values().published);
     	if (item.values().published > 0) {
       		return true;
+      		
     	}
     	else {
       		return false;
@@ -97,8 +99,8 @@ seadSpaces.initSort = function(){
 
   	 });
   	$('.filter').removeClass('active');
-	$(this).addClass('active');	
-  	return false;
+		$(this).addClass('active');	
+  		return false;
 	});
 
 	$('#reset-button').click(function() {
@@ -168,7 +170,7 @@ seadSpaces.buildGrid = function(size,i,projectName,projectDescription,projectLog
 	page += '<li class="bytes_raw">'+bytes_raw+'</li>';
 	if(bytes){page += '<li class="bytes" title="'+bytes+'"><i class="fa fa-lg fa-hdd-o"></i> '+bytes+'</li>';}
 	
-	if(published){page += '<li class="published" title="'+published+' published dataset"><i class="fa fa-lg fa-folder-open"></i> '+published+'</li>';}
+	if(published){page += '<li title="'+published+' published dataset"><i class="fa fa-lg fa-folder-open"></i> <span class="published">'+published+'</span></li>';}
 	page += '<ul>';
 	page += '</div>';
 	page += '</div>';
